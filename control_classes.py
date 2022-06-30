@@ -5,11 +5,13 @@ import random
 float_formatter = "{:.0f}".format
 np.set_printoptions(formatter={'float_kind':float_formatter})
 
+#NÃO É DETERMINÍSTICA POIS ALTERA UM ARQUIVO EXTERNO (open(filename, "a"))
 def saveToDB(dataList, filename):
     resultStr = ",".join([str(x) for x in dataList]) + "\n"
     with open(filename, "a") as fileobj:
         fileobj.write(resultStr)
 
+#NÃO É DETERMINÍSTICA POIS ALTERA UM ARQUIVO EXTERNO (open(filename, "w"))
 def resetDB(filename):
     with open(filename, "w") as fileobj:
         fileobj.write("winner,starter,turns,pts\n")
@@ -230,6 +232,7 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
 
         self.calculateMeldsAndChances()
 
+#############################ESSA PARTE PODE SER DETERMINÍSTICA SE FOR ADAPTADA
         flag4carder=0
         for meld in self.melds:  
             if len(meld)>=4:
@@ -242,7 +245,8 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
         
         countMelds=len(self.melds)
         countChances=len(self.chances)
-        
+###################################################################
+
         #cases for picking up from discard pile
         #priority 1: Check if the card on top of discard pile is a Joker, pickup
         if(openCard.value==-1 or openCard.value==self.hand.rummyJokerVal):
@@ -261,6 +265,7 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
         if breakFlag:
             return "D"
 
+#############################ESSA PARTE PODE SER DETERMINÍSTICA SE FOR ADAPTADA
         #priority 2: Check if the card on top of discard pile forms a pure Sequence:
         flagPureSeqUpd=0
         for meld in self.melds:  
@@ -289,6 +294,7 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
         # Else Pickup from Deck(return D). 
         # Remove the card that we picked up from the discard pile
         return "D"
+############################################################
         
         
     def isObserving(self):  # info is passed to player if it is "observing", true for only advanced agent
@@ -302,7 +308,7 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
     def opponentDiscards(self, openCard):
         pass
     
-
+##############################################PAREI AQUI
 class BasicAgent(Player):
     
     def getPickupChoice(self, openCard):
@@ -638,7 +644,7 @@ class AdvancedAgent(Player):  # TODO: override getDiscardChoice()
         except:
             return 0
 
-
+#############################################FIM DO TRECHO QUE AINDA NÃO LI
 
 if __name__ == "__main__":
     resetDB("resultData.csv")

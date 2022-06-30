@@ -8,6 +8,7 @@ suitDict = {"S": 0, "H": 1, "C": 2, "D":3}
 
 # Helper functions for matrix representation of cards
 
+####################É DETERMINÍSTICA
 # Gets index of first occuring card in a hand (row-wise)
 def getFirstCard(matrix, shp):
     for i in range(shp[0]):
@@ -15,6 +16,7 @@ def getFirstCard(matrix, shp):
             if matrix[i][j] == 1:
                 return (i, j)
 
+####################É DETERMINÍSTICA
 # Gets all indexes of same value for same-value melds
 def getSameValue(matrix, index):
     j = index[1]
@@ -183,6 +185,7 @@ class Hand:
             else:
                 return False
         
+################ESSA PARTE É DETERMINÍSTICA
         # Recursive case
         # search for straight melds on right side only, prevents overlap
         shp = np.shape(matrix)
@@ -251,7 +254,7 @@ class Hand:
             melds.append([[(i, j), j_vals[0], "JKR"], 0, 0])  # priority 10
 
         # print(melds)  # for debugging purposes only
-
+##############################################
         for item in melds:  # if no melds, following block is skipped and it returns false
             meld = item[0]
             matrixCopy = matrix.copy()
@@ -311,6 +314,7 @@ class Hand:
             else:
                 return fullHand
         
+#######################ESSA PARTE É DETERMINÍSTICA
         # Recursive case
         # search for straight melds on right side only, prevents overlap
         shp = np.shape(matrix)
@@ -381,6 +385,7 @@ class Hand:
         # print(melds)  # for debugging purposes only
         melds.append([[(i, j)], 0])  # case where card is added to points and not considered for future melds
         min_temp = fullHand
+##############################################
 
         for item in melds:
             meld = item[0]
