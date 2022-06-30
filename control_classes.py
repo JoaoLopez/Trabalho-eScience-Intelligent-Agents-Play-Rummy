@@ -308,7 +308,6 @@ class Player:  # by default, it's a real user. Agents inherit from this class.
     def opponentDiscards(self, openCard):
         pass
     
-##############################################PAREI AQUI
 class BasicAgent(Player):
     
     def getPickupChoice(self, openCard):
@@ -644,7 +643,6 @@ class AdvancedAgent(Player):  # TODO: override getDiscardChoice()
         except:
             return 0
 
-#############################################FIM DO TRECHO QUE AINDA NÃO LI
 
 if __name__ == "__main__":
     resetDB("resultData.csv")
